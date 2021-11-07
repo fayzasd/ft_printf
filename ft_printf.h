@@ -22,4 +22,5 @@ void	ft_putstr(char *str);
 void 	ft_putchar(char c);
 void    ft_putnbr(long n);
 void	ft_puthex(long n);
+char	*ft_tolower(char *str);
 #endif

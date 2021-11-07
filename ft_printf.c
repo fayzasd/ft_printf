@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+
+
 char *ft_rev(char *str)
 {
 	char *temp;
@@ -23,6 +25,7 @@ char *ft_rev(char *str)
 	while (str[i] != '\0')
 		i++;
 	temp = (char *)malloc(sizeof(char) * i + 1);
+	i--;
 	while (i > 0)
 	{
 		temp[j] = str[i];
@@ -72,8 +75,7 @@ void ft_puthex(long num)
 		}
 		num /= 16;
 	}
-	ft_putstr("0x");
-	ft_putstr(ft_rev(hex));
+	ft_putstr(ft_tolower(ft_rev(hex)));
 }
 
 int check_spec(char c, va_list args)
@@ -104,11 +106,17 @@ int check_spec(char c, va_list args)
 			i = 4294967296 + i;
 		ft_putnbr(i);
 	}
-	else if (c == 'X')
+	else if (c == 'p')
 	{
 		long addr;
 		addr = (long)va_arg(args,void  *);
+		ft_putstr("0x");
 		ft_puthex(addr);
+		ft_putchar('0');
+	}
+	else if (c == 'x')
+	{
+		ft_puthex(va_arg(args, int));
 	}
 	return ret;
 }
@@ -152,10 +160,10 @@ int	ft_printf(const char *str, ...)
 
 int main(){
 	char c = 'a';
-	int i = -10;
+	int i = 12345;
 	char *s = "epicity";
 	void *p = malloc(1);
 
-	ft_printf("ft_printf --  %X \n",p);
-	printf("printf -- %p ",p);
+	ft_printf("ft_printf --  %x \n",i);
+	printf("printf -- %x ",i);
 }

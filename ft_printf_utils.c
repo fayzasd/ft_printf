@@ -12,6 +12,20 @@
 
 #include "ft_printf.h"
 
+char	*ft_tolower(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ('A' <= str[i]&& str[i]<= 'Z')
+			str[i]= str[i]+ 32;
+		i++;
+	}
+	return str;
+}
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
