@@ -64,15 +64,9 @@ void ft_puthex(long num)
 	{
 		rem = num % 16;
 		if (rem < 10)
-		{
-			hex[i] = rem + 48;
-			i++;
-		}
+			hex[i++] = rem + 48;
 		else
-		{
-			hex[i] = rem + 55;
-			i++;
-		}
+			hex[i++] = rem + 55;
 		num /= 16;
 	}
 	ft_putstr(ft_tolower(ft_rev(hex)));
@@ -115,9 +109,9 @@ int check_spec(char c, va_list args)
 		ft_putchar('0');
 	}
 	else if (c == 'x')
-	{
 		ft_puthex(va_arg(args, int));
-	}
+	else if (c == 'X')
+		ft_puthex(va_arg(args, int));
 	return ret;
 }
 
@@ -162,8 +156,8 @@ int main(){
 	char c = 'a';
 	int i = 12345;
 	char *s = "epicity";
-	void *p = malloc(1);
+	void *p = malloc(10);
 
-	ft_printf("ft_printf --  %x \n",i);
-	printf("printf -- %x ",i);
+	ft_printf("ft_printf --  %p \n",p);
+	printf("printf -- %p ",p);
 }
