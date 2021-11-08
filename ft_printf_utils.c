@@ -3,59 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fasad <fasad@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: fasad <fasad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:14:50 by fasad             #+#    #+#             */
-/*   Updated: 2021/11/07 19:00:38 by fasad            ###   ########.fr       */
+/*   Updated: 2021/11/08 20:14:45 by fasad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_tolower(char *str)
+int	ft_putchar(char c, int ret)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ('A' <= str[i]&& str[i]<= 'Z')
-			str[i]= str[i]+ 32;
-		i++;
-	}
-	return str;
-}
-
-void	ft_putchar(char c)
-{
+	ret++;
 	write(1, &c, 1);
+	return (ret);
 }
 
-void	ft_putstr(char *s)
-{
+int	ft_putstr(char *s, int ret)
+{	
 	if (s)
 	{
 		while (*s)
 		{
 			write(1, s, 1);
 			s++;
+			ret++;
 		}
 	}
+	else
+		ret = ft_putstr("(null)", ret);
+	return (ret);
 }
 
-void	ft_putnbr(long n)
+int	ft_putnbr(long n, int ret)
 {
-	long x;
+	long	x;
 
 	x = n;
 	if (x < 0)
 	{
-		ft_putchar('-');
+		ret = ft_putchar('-', ret);
 		x = x * -1;
 	}
 	if (x / 10 > 0)
 	{
-		ft_putnbr(x / 10);
+		ret = ft_putnbr(x / 10, ret);
 	}
-	ft_putchar((x % 10) + '0');
+	ret = ft_putchar((x % 10) + '0', ret);
+	return (ret);
 }
